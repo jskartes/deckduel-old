@@ -1,6 +1,25 @@
+$game-font: 'Skranji';
+$game-font-normal-weight: 400;
+$game-font-bold-weight: 700;
+
+@mixin flex-column-center {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
 * {
   box-sizing: border-box;
   cursor: default;
   margin: 0;
   overscroll-behavior: none;
+}
+
+.App {
+  @include flex-column-center;
+  font-family: $game-font;
+  font-size: 3vmin;
+  font-weight: $game-font-bold-weight;
 }
