@@ -1,3 +1,5 @@
+import sendRequest from './send-request';
+
 export const registerUser = async submitData => {
   const res = await fetch('/api/users/register', {
     method: 'POST',
@@ -16,4 +18,8 @@ export const loginUser = async credentials => {
   });
   if (res.ok) return res.json();
   throw new Error();
+}
+
+export const logoutUser = () => {
+  sendRequest('/api/users/logout');
 }

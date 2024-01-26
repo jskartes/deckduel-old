@@ -25,13 +25,23 @@ const loginUser = async (req, res) => {
       user.password
     );
     if (!passwordMatch) throw new Error();
+    user.isOnline = true;
+    await user.save();
     res.json(createJWT(user));
   } catch (error) {
     res.status(400).json(error);
   }
 }
 
+const logoutUser = async (req, res) => {
+  const user = await User.findOne({username: req.user.username});
+  user.isOnline = false;
+  await user.save();
+  res.json('Logout successful');
+}
+
 module.exports = {
   loginUser,
+  logoutUser,
   registerUser
 }

@@ -16,7 +16,7 @@ const App = () => {
         <>
           <Route
             path={`/${user.username}`}
-            element={<UserPage user={user} />}
+            element={<UserPage user={user} setUser={setUser} />}
           />
           <Route
             path='/*'

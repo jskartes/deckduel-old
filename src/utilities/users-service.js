@@ -26,3 +26,8 @@ export const loginUser = async credentials => {
   localStorage.setItem('token', token);
   return getUser();
 }
+
+export const logoutUser = () => {
+  usersAPI.logoutUser();
+  localStorage.removeItem('token');
+}

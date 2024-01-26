@@ -12,6 +12,7 @@ server.use(express.json());
 server.use(express.static(
   path.resolve(path.dirname(__filename), '../build')
 ));
+server.use(require('./config/checkToken'));
 
 server.use('/api/users', require('./routes/api/users'));
 
