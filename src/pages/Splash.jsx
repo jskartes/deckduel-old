@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 const Splash = () => {
   return (
     <div className='Splash'>
-      <span id='splash-title'>
+      <div id='splash-title'>
         <span>D</span>
         <span>e</span>
         <span>c</span>
@@ -12,7 +12,7 @@ const Splash = () => {
         <span>u</span>
         <span>e</span>
         <span>l</span>
-      </span>
+      </div>
       <div id='splash-nav'>
         <Link className='nav-button' to='/register'>Register</Link>
         <Link className='nav-button' to='/login'>Log In</Link>

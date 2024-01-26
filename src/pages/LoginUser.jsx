@@ -30,6 +30,11 @@ const LoginUser = ({ setUser }) => {
     }
   }
 
+  const submitDisabled = (
+    formData.username === '' ||
+    formData.password === ''
+  );
+
   return (
     <div className='LoginUser'>
       <span className='form-title'>Player Login</span>
@@ -50,10 +55,14 @@ const LoginUser = ({ setUser }) => {
           value={formData.password}
           onChange={handleChange}
         />
-        <button className='nav-button' type='submit'>Log In</button>
+        <button
+          className='nav-button'
+          type='submit'
+          disabled={submitDisabled}
+        >Log In</button>
+        <p className='error-message'>&nbsp;{formData.errorMessage}</p>
       </form>
 
-      <p className='error-message'>{formData.errorMessage}</p>
 
       <Link className='nav-button' to='/register'>New Player Registration</Link>
     </div>

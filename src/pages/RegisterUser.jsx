@@ -94,10 +94,8 @@ const RegisterUser = ({ setUser }) => {
           type='submit'
           disabled={submitDisabled}
         >Register</button>
+        <p className='error-message'>&nbsp;{formData.errorMessage}</p>
       </form>
-
-      {formData.errorMessage !== '' &&
-      <p className='error-message'>{formData.errorMessage}</p>}
 
       <Link className='nav-button' to='/login'>Player Login</Link>
     </div>

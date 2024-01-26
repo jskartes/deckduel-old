@@ -2,24 +2,195 @@ $game-font: 'Skranji';
 $game-font-normal-weight: 400;
 $game-font-bold-weight: 700;
 
-@mixin flex-column-center {
+@mixin flex-center {
   align-items: center;
   display: flex;
-  flex-direction: column;
   justify-content: center;
 }
 
 
 * {
   box-sizing: border-box;
+  color: unset;
   cursor: default;
   margin: 0;
   overscroll-behavior: none;
 }
 
 body {
-  @include flex-column-center;
+  background-color: black;
+}
 
-  background-color: #ccc;
+
+.App {
+  color: #bbb;
+  font-family: $game-font;
   height: 100vh;
+
+  .nav-button {
+    background-color: #222;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 4vmin;
+    margin: 0 4vmin;
+    padding: 0.5vmin 3vmin;
+    text-decoration: none;
+    transition: 0.1s ease-in-out;
+
+    &:hover {
+      background-color: yellow;
+      color: #222;
+    }
+  }
+}
+
+
+.Splash {
+  @include flex-center;
+
+  flex-direction: column;
+  height: 100%;
+
+  #splash-title {
+    @include flex-center;
+
+    font-size: 20vmin;
+    font-weight: $game-font-bold-weight;
+    height: 40vmin;
+
+    > span {
+      transition: 0.15s ease-in-out;
+
+      &:hover {
+        color: yellow;
+        transform: scale(1.1);
+      }
+    }
+  }
+}
+
+
+.LoginUser,
+.RegisterUser {
+  @include flex-center;
+
+  flex-direction: column;
+  height: 100%;
+
+  .form-title {
+    font-size: 7vmin;
+    font-weight: $game-font-bold-weight;
+  }
+
+  form {
+    display: grid;
+    font-size: 2.2vmin;
+    grid-template-columns: max-content 1fr;
+    margin: 4vmin 0 8vmin;
+    row-gap: 1.755vmin;
+
+    label {
+      align-items: center;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    input {
+      background-color: #222;
+      border: none;
+      border-radius: 4px;
+      color: yellow;
+      cursor: text;
+      font-family: inherit;
+      font-size: inherit;
+      margin-left: 2vmin;
+      padding: 0.15vmin 1vmin;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    .form-instruction {
+      font-size: 1.5vmin;
+      list-style: none;
+      margin-top: -1vmin;
+      padding: 0 2.5vmin;
+    }
+
+    .nav-button {
+      font-size: 3vmin;
+      grid-column: span 2;
+      margin: 3vmin auto;
+
+      &:disabled {
+        color: #444;
+        cursor: default;
+        transition: none;
+
+        &:hover {
+          background-color: #222;
+        }
+      }
+    }
+
+    .error-message {
+      color: red;
+      grid-column: span 2;
+      text-align: center;
+    }
+  }
+}
+
+
+.UserPage {
+  display: grid;
+  grid-template-columns: 25% 75%;
+  height: 100%;
+  padding: 10px;
+
+  .UserPageNav {
+    align-items: center;
+    background-color: #222;
+    border-radius: 4px;
+    display: flex;
+    font-size: 2vmin;
+    height: 6vmin;
+    justify-content: space-between;
+    padding: 0 2vmin;
+    width: 100%;
+
+    .username {
+      color: yellow;
+      font-size: 2.25vmin;
+      font-weight: $game-font-bold-weight;
+      margin-right: 0.3vmin;
+    }
+
+    .nav-links {
+      span {
+        border-right: 1px solid #444;
+        cursor: pointer;
+        padding: 0.5vmin 2vmin;
+        transition: 0.1s ease-in-out;
+
+        &:last-of-type {
+          border-right: none;
+          padding-right: 0;
+        }
+
+        &:hover {
+          color: yellow;
+        }
+      }
+    }
+  }
+
+  .Chat {
+    background-color: #222;
+    border-radius: 4px;
+    margin-right: 10px;
+  }
 }

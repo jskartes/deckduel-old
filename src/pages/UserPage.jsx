@@ -1,4 +1,6 @@
 import * as usersService from '../utilities/users-service';
+import Chat from '../components/Chat';
+import UserPageNav from '../components/UserPageNav';
 
 const UserPage = ({ user, setUser }) => {
   const handleLogout = event => {
@@ -8,8 +10,10 @@ const UserPage = ({ user, setUser }) => {
 
   return (
     <div className='UserPage'>
-      <h1>Hello, {user.username}!</h1>
-      <button onClick={handleLogout}>Log Out</button>
+      <Chat />
+      <div className='main-content'>
+        <UserPageNav user={user} handleLogout={handleLogout} />
+      </div>
     </div>
   );
 }
