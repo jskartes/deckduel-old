@@ -20,6 +20,11 @@ const RegisterUser = () => {
     event.preventDefault();
   }
 
+  const submitDisabled = (
+    formData.password.length < 8 ||
+    formData.password !== formData.confirmPassword
+  );
+
   return (
     <div className='RegisterUser'>
       <span className='form-title'>New Player Registration</span>
@@ -32,6 +37,11 @@ const RegisterUser = () => {
           value={formData.username}
           onChange={handleChange}
         />
+        <div></div>
+        <ul className='form-instruction'>
+          <li>Maxiumum 20 characters</li>
+          <li>Alphanumeric (A&ndash;Z, a&ndash;z, 0&ndash;9) and/or underscores (_) only</li>
+        </ul>
         <label>E-mail Address</label>
         <input
           required
@@ -48,6 +58,10 @@ const RegisterUser = () => {
           value={formData.password}
           onChange={handleChange}
         />
+        <div></div>
+        <ul className='form-instruction'>
+          <li>Minimum 8 characters</li>
+        </ul>
         <label>Confirm Password</label>
         <input
           required
@@ -56,7 +70,11 @@ const RegisterUser = () => {
           value={formData.confirmPassword}
           onChange={handleChange}
         />
-        <button className='nav-button' type='submit'>Register</button>
+        <button
+          className='nav-button'
+          type='submit'
+          disabled={submitDisabled}
+        >Register</button>
       </form>
 
       <Link className='nav-button' to='/login'>Player Login</Link>
