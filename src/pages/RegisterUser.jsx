@@ -1,23 +1,42 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import * as usersService from '../utilities/users-service';
 
-const RegisterUser = () => {
+const RegisterUser = ({ setUser }) => {
   const [formData, setFormData] = useState({
     username: '',
     email: '',
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
+    errorMessage: ''
   });
 
   const handleChange = event => {
     setFormData({
       ...formData,
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
+      errorMessage: ''
     });
   }
 
-  const handleSubmit = event => {
+  const handleSubmit = async event => {
     event.preventDefault();
+
+    try {
+      const { username, email, password } = formData;
+      const submitData = {username, email, password};
+      const userData = await usersService.registerUser(submitData);
+
+      const credentials = {username, password};
+      const user = await usersService.loginUser(credentials);
+      
+      setUser(user);
+    } catch {
+      setFormData({
+        ...formData,
+        errorMessage: 'Registration failed; try again'
+      })
+    }
   }
 
   const submitDisabled = (
@@ -76,6 +95,9 @@ const RegisterUser = () => {
           disabled={submitDisabled}
         >Register</button>
       </form>
+
+      {formData.errorMessage !== '' &&
+      <p className='error-message'>{formData.errorMessage}</p>}
 
       <Link className='nav-button' to='/login'>Player Login</Link>
     </div>

@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 
 const SALT_ROUNDS = 6;
 
-const deckSchema = newSchema({
+const deckSchema = new Schema({
   name: {
     type: String,
     required: true

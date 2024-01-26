@@ -1,21 +1,33 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import * as usersService from '../utilities/users-service';
 
-const LoginUser = () => {
+const LoginUser = ({ setUser }) => {
   const [formData, setFormData] = useState({
     username: '',
-    password: ''
+    password: '',
+    errorMessage: ''
   });
 
   const handleChange = event => {
     setFormData({
       ...formData,
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
+      errorMessage: ''
     });
   }
 
-  const handleSubmit = event => {
+  const handleSubmit = async event => {
     event.preventDefault();
+    try {
+      const user = await usersService.loginUser(formData);
+      setUser(user);
+    } catch {
+      setFormData({
+        ...formData,
+        errorMessage: 'Login failed; try again'
+      });
+    }
   }
 
   return (
@@ -40,6 +52,8 @@ const LoginUser = () => {
         />
         <button className='nav-button' type='submit'>Log In</button>
       </form>
+
+      <p className='error-message'>{formData.errorMessage}</p>
 
       <Link className='nav-button' to='/register'>New Player Registration</Link>
     </div>

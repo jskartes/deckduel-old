@@ -13,6 +13,8 @@ server.use(express.static(
   path.resolve(path.dirname(__filename), '../build')
 ));
 
+server.use('/api/users', require('./routes/api/users'));
+
 server.get('/*', (req, res) => {
   res.sendFile(
     path.resolve(path.dirname(__filename), '../build', 'index.html')
