@@ -17,9 +17,9 @@ $game-font-bold-weight: 700;
   overscroll-behavior: none;
 }
 
-.App {
+body {
   @include flex-column-center;
-  font-family: $game-font;
-  font-size: 3vmin;
-  font-weight: $game-font-bold-weight;
+
+  background-color: #ccc;
+  height: 100vh;
 }
