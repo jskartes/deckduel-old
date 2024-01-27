@@ -1,6 +1,15 @@
-$game-font: 'Skranji';
-$game-font-normal-weight: 400;
-$game-font-bold-weight: 700;
+$embedded-form-background-color: #111;
+$error-message-color: red;
+$font: 'Skranji';
+$font-bold-weight: 700;
+$font-color: #bbb;
+$font-normal-weight: 400;
+$highlight-color: yellow;
+$modal-background-color: rgba(255, 255, 255, 0.15);
+$online-indicator-color: lightgreen;
+$panel-background-color: #222;
+$panel-overlay-background-color: #333;
+$window-background-color: black;
 
 @mixin flex-center {
   align-items: center;
@@ -21,16 +30,16 @@ $game-font-bold-weight: 700;
 }
 
 body {
-  background-color: black;
+  background-color: $window-background-color;
 }
 
 .App {
-  color: #bbb;
-  font-family: $game-font;
+  color: $font-color;
+  font-family: $font;
   height: 100vh;
 
   .nav-button {
-    background-color: #222;
+    background-color: $panel-background-color;
     border: none;
     border-radius: 4px;
     cursor: pointer;
@@ -42,15 +51,15 @@ body {
     transition: 0.1s ease-in-out;
 
     &:hover {
-      background-color: yellow;
-      color: #222;
+      background-color: $highlight-color;
+      color: $panel-background-color;
     }
   }
 
   .UserSearch {
     @include flex-center;
 
-    background-color: rgba(255, 255, 255, 0.15);
+    background-color: $modal-background-color;
     border-radius: 4px;
     flex-direction: column;
     height: 50vmin;
@@ -73,7 +82,7 @@ body {
       overflow-y: scroll;
 
       .username {
-        background-color: #444;
+        background-color: $panel-overlay-background-color;
         border-radius: 4px;
         cursor: pointer;
         font-size: 2vmin;
@@ -83,13 +92,13 @@ body {
         width: 30vmin;
 
         .online {
-          color: lightgreen;
+          color: $online-indicator-color;
           margin-right: 0.5vmin;
         }
 
         &:hover {
-          background-color: yellow;
-          color: black;
+          background-color: $highlight-color;
+          color: $panel-background-color;
         }
       }
     }
@@ -102,7 +111,7 @@ body {
       width: 100%;
 
       input {
-        background-color: #111;
+        background-color: $embedded-form-background-color;
         border: none;
         border-radius: 4px;
         color: inherit;
@@ -118,7 +127,7 @@ body {
       }
 
       button {
-        background-color: #111;
+        background-color: $embedded-form-background-color;
         border: none;
         border-radius: 4px;
         color: inherit;
@@ -128,8 +137,8 @@ body {
         transition: 0.1s ease-in-out;
 
         &:hover {
-          background-color: yellow;
-          color: black;
+          background-color: $highlight-color;
+          color: $panel-background-color;
         }
       }
     }
@@ -146,14 +155,14 @@ body {
     @include flex-center;
 
     font-size: 20vmin;
-    font-weight: $game-font-bold-weight;
+    font-weight: $font-bold-weight;
     height: 40vmin;
 
     > span {
       transition: 0.15s ease-in-out;
 
       &:hover {
-        color: yellow;
+        color: $highlight-color;
         transform: scale(1.1);
       }
     }
@@ -168,7 +177,7 @@ body {
 
   .form-title {
     font-size: 7vmin;
-    font-weight: $game-font-bold-weight;
+    font-weight: $font-bold-weight;
   }
 
   form {
@@ -176,7 +185,7 @@ body {
     font-size: 2.2vmin;
     grid-template-columns: max-content 1fr;
     margin: 4vmin 0 8vmin;
-    row-gap: 1.755vmin;
+    row-gap: 1.75vmin;
 
     label {
       align-items: center;
@@ -185,10 +194,10 @@ body {
     }
 
     input {
-      background-color: #222;
+      background-color: $panel-background-color;
       border: none;
       border-radius: 4px;
-      color: yellow;
+      color: $highlight-color;
       cursor: text;
       font-family: inherit;
       font-size: inherit;
@@ -207,7 +216,7 @@ body {
       padding: 0 2.5vmin;
 
       span {
-        color: yellow;
+        color: $highlight-color;
       }
     }
 
@@ -217,18 +226,18 @@ body {
       margin: 3vmin auto;
 
       &:disabled {
-        color: #444;
+        color: $panel-overlay-background-color;
         cursor: default;
         transition: none;
 
         &:hover {
-          background-color: #222;
+          background-color: $panel-background-color;
         }
       }
     }
 
     .error-message {
-      color: red;
+      color: $error-message-color;
       grid-column: span 2;
       text-align: center;
     }
@@ -242,7 +251,7 @@ body {
   padding: 10px;
 
   .Chat {
-    background-color: #222;
+    background-color: $panel-background-color;
     border-radius: 4px;
     display: flex;
     font-size: 1.85vmin;
@@ -255,19 +264,19 @@ body {
       margin-top: 0.5vmin;
 
       .nav-button {
-        background-color: black;
+        background-color: $panel-overlay-background-color;
         font-size: 3vmin;
         margin: auto;
 
         &:hover {
-          background-color: yellow;
+          background-color: $highlight-color;
         }
       }
     }
 
     .friends {
-      background-color: #2b2b2b;
-      border: 1px solid black;
+      background-color: $panel-overlay-background-color;
+      border: 1px solid $window-background-color;
       border-radius: 4px;
       display: flex;
       flex-direction: column;
@@ -278,7 +287,7 @@ body {
       width: 97.5%;
 
       .friends-list {
-        border-top: 1px solid black;
+        border-top: 1px solid $window-background-color;
         flex: auto;
         margin: 0.5vmin auto;
         overflow-y: scroll;
@@ -289,11 +298,11 @@ body {
     .inactive {
       @include flex-center;
 
-      color: #2b2b2b;
+      color: $panel-overlay-background-color;
       flex: auto;
       flex-direction: column;
       font-size: 5vmin;
-      font-weight: $game-font-bold-weight;
+      font-weight: $font-bold-weight;
     }
 
     ul {
@@ -306,10 +315,12 @@ body {
       padding: unset;
 
       li {
-        background-color: #333;
         border-radius: 4px;
         margin: 0.4vmin 0.25vmin;
         padding: 0.25vmin;
+
+        /*----- DEV -----*/
+        background-color: skyblue; // change when chat implemented
       }
     }
 
@@ -320,7 +331,7 @@ body {
       padding: 0.25vmin;
 
       input {
-        background-color: #111;
+        background-color: $embedded-form-background-color;
         border: none;
         border-radius: 4px;
         color: inherit;
@@ -335,7 +346,7 @@ body {
       }
 
       button {
-        background-color: #111;
+        background-color: $embedded-form-background-color;
         border: none;
         border-radius: 4px;
         color: inherit;
@@ -345,8 +356,8 @@ body {
         transition: 0.1s ease-in-out;
 
         &:hover {
-          background-color: yellow;
-          color: black;
+          background-color: $highlight-color;
+          color: $panel-background-color;
         }
       }
     }
@@ -354,7 +365,7 @@ body {
 
   .UserPageNav {
     align-items: center;
-    background-color: #222;
+    background-color: $panel-background-color;
     border-radius: 4px;
     display: flex;
     font-size: 2vmin;
@@ -364,15 +375,15 @@ body {
     width: 100%;
 
     .username {
-      color: yellow;
+      color: $highlight-color;
       font-size: 2.25vmin;
-      font-weight: $game-font-bold-weight;
+      font-weight: $font-bold-weight;
       margin-right: 0.3vmin;
     }
 
     .nav-links {
       span {
-        border-right: 1px solid #444;
+        border-right: 1px solid $panel-overlay-background-color;
         cursor: pointer;
         padding: 0.5vmin 2vmin;
         transition: 0.1s ease-in-out;
@@ -383,7 +394,7 @@ body {
         }
 
         &:hover {
-          color: yellow;
+          color: $highlight-color;
         }
       }
     }
