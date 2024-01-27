@@ -57,7 +57,7 @@ const RegisterUser = ({ setUser }) => {
         />
         <div></div>
         <ul className='form-instruction'>
-          <li>Maxiumum 20 characters</li>
+          <li><span>Max</span>imum <span>20</span> characters</li>
           <li>Alphanumeric (A&ndash;Z, a&ndash;z, 0&ndash;9) and/or underscores (_) only</li>
         </ul>
         <label>E-mail Address</label>
@@ -78,7 +78,7 @@ const RegisterUser = ({ setUser }) => {
         />
         <div></div>
         <ul className='form-instruction'>
-          <li>Minimum 8 characters</li>
+          <li><span>Min</span>imum <span>8</span> characters</li>
         </ul>
         <label>Confirm Password</label>
         <input
