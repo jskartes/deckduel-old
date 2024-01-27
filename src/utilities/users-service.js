@@ -16,6 +16,11 @@ export const getUser = () => {
   return token ? JSON.parse(atob(token.split('.')[1])).user : null;
 }
 
+export const getAllUsers = async () => {
+  const allUsers = await usersAPI.getAllUsers();
+  return allUsers;
+}
+
 export const registerUser = async submitData => {
   const user = await usersAPI.registerUser(submitData);
   return user;

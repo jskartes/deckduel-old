@@ -1,5 +1,9 @@
 import sendRequest from './send-request';
 
+export const getAllUsers = async () => {
+  return sendRequest('/api/users');
+}
+
 export const registerUser = async submitData => {
   const res = await fetch('/api/users/register', {
     method: 'POST',

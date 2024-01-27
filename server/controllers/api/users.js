@@ -6,6 +6,11 @@ const createJWT = user => {
   return jwt.sign({user}, process.env.SECRET, {expiresIn: '24h'});
 }
 
+const getAllUsers = async (req, res) => {
+  const allUsers = await User.find({}).sort({username: 'asc'});
+  res.json(allUsers);
+}
+
 const registerUser = async (req, res) => {
   try {
     const user = await User.create(req.body);
@@ -40,6 +45,7 @@ const logoutUser = async (req, res) => {
 }
 
 module.exports = {
+  getAllUsers,
   loginUser,
   logoutUser,
   registerUser

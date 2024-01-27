@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import socketIOClient from 'socket.io-client';
 
-const Chat = () => {
+const Chat = ({ setShowUserSearch }) => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState('');
 
@@ -26,6 +26,12 @@ const Chat = () => {
 
   return (
     <div className='Chat'>
+      <div>
+        <button
+          className='nav-button'
+          onClick={() => setShowUserSearch(true)}
+        >Search Users</button>
+      </div>
       <ul>
         {messages.map((message, index) => (
           <li key={index}>{message}</li>

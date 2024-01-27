@@ -10,7 +10,7 @@ const App = () => {
   const [user, setUser] = useState(getUser());
 
   return (
-    <div className='App'>
+    <div id='App' className='App'>
       <Routes>
         {user ?
         <>
