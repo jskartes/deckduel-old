@@ -1,22 +1,36 @@
 const express = require('express');
-const path = require('path');
 const morgan = require('morgan');
 require('dotenv').config();
 require('./config/database');
 
-const server = express();
+const socketIO = require('socket.io');
+const path = require('path');
+const http = require('http');
+
+const app = express();
+const server = http.createServer(app);
+
+const io = socketIO(server, {
+  cors: {origin: 'https://localhost:3000'}
+});
+io.on('connection', socket => {
+  console.log('User connected...');
+  socket.on('chat message', message => io.emit('chat message', message));
+  socket.on('disconnect', () => console.log('User disconnected...'));
+});
+
 const port = process.env.PORT || 3001;
 
-server.use(morgan('dev'));
-server.use(express.json());
-server.use(express.static(
+app.use(morgan('dev'));
+app.use(express.json());
+app.use(express.static(
   path.resolve(path.dirname(__filename), '../build')
 ));
-server.use(require('./config/checkToken'));
+app.use(require('./config/checkToken'));
 
-server.use('/api/users', require('./routes/api/users'));
+app.use('/api/users', require('./routes/api/users'));
 
-server.get('/*', (req, res) => {
+app.get('/*', (req, res) => {
   res.sendFile(
     path.resolve(path.dirname(__filename), '../build', 'index.html')
   );
