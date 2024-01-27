@@ -13,8 +13,10 @@ const UserPage = ({ user, setUser }) => {
     setUser(null);
   }
 
+  const blur = showUserSearch ? 'blur' : '';
+
   return (
-    <div className='UserPage'>
+    <div className={`UserPage ${blur}`}>
       <Chat setShowUserSearch={setShowUserSearch} />
       <div className='main-content'>
         <UserPageNav user={user} handleLogout={handleLogout} />

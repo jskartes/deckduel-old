@@ -8,6 +8,10 @@ $game-font-bold-weight: 700;
   justify-content: center;
 }
 
+.blur {
+  filter: blur(8px);
+}
+
 * {
   box-sizing: border-box;
   color: unset;
