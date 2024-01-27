@@ -7,7 +7,11 @@ const createJWT = user => {
 }
 
 const getAllUsers = async (req, res) => {
-  const allUsers = await User.find({}).sort({username: 'asc'});
+  const allUsers = await (
+    User.find({username: {$nin: [req.user.username]}})
+        .collation({locale: 'en', strength: 1})
+        .sort({username: 'asc'})
+  );
   res.json(allUsers);
 }
 

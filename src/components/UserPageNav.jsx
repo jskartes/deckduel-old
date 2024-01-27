@@ -7,6 +7,7 @@ const UserPageNav = ({ user, handleLogout }) => {
       <div className='nav-links'>
         <span>Link</span>
         <span>Link</span>
+        <span>Account Settings</span>
         <span onClick={handleLogout}>Log Out</span>
       </div>
     </div>

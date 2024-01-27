@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import * as usersService from '../utilities/users-service';
+import { loginUser } from '../utilities/users-service';
+import { registerUser } from '../utilities/users-api';
 
 const RegisterUser = ({ setUser }) => {
   const [formData, setFormData] = useState({
@@ -25,11 +26,9 @@ const RegisterUser = ({ setUser }) => {
     try {
       const { username, email, password } = formData;
       const submitData = {username, email, password};
-      const userData = await usersService.registerUser(submitData);
-
+      await registerUser(submitData);
       const credentials = {username, password};
-      const user = await usersService.loginUser(credentials);
-      
+      const user = await loginUser(credentials);
       setUser(user);
     } catch {
       setFormData({

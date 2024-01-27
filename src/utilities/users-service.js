@@ -21,11 +21,6 @@ export const getAllUsers = async () => {
   return allUsers;
 }
 
-export const registerUser = async submitData => {
-  const user = await usersAPI.registerUser(submitData);
-  return user;
-}
-
 export const loginUser = async credentials => {
   const token = await usersAPI.loginUser(credentials);
   localStorage.setItem('token', token);

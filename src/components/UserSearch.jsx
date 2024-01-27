@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import * as usersService from '../utilities/users-service';
 
-const UserSearch = ({ handleCancel }) => {
+const UserSearch = ({ handleCancel, initiateChat }) => {
   const [users, setUsers] = useState([]);
   const [searchString, setSearchString] = useState('');
 
@@ -16,7 +16,8 @@ const UserSearch = ({ handleCancel }) => {
   const handleChange = event => setSearchString(event.target.value);
 
   const filteredUsers = users.filter(user => {
-    return user.username.includes(searchString);
+    return user.username.toLowerCase()
+                        .includes(searchString.toLowerCase());
   });
 
   return (
@@ -24,7 +25,14 @@ const UserSearch = ({ handleCancel }) => {
       <span>User Search</span>
       <div className='user-list'>
         {filteredUsers.map((user, index) => (
-          <span className='username' key={index}>{user.username}</span>
+          <span
+            className='username' 
+            key={index}
+            onClick={() => initiateChat(user)}
+          >
+            {user.isOnline && <span className='online'>&#9679;</span>}
+            {user.username}
+          </span>
         ))}
       </div>
       <div className='user-search'>

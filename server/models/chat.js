@@ -14,7 +14,6 @@ const chatMessageSchema = new Schema({
 });
 
 const chatSchema = new Schema({
-  isInGame: Boolean,
   players: {
     type: [Schema.Types.ObjectId],
     ref: 'User'
