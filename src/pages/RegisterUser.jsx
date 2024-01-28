@@ -57,8 +57,12 @@ const RegisterUser = ({ setUser }) => {
         />
         <div></div>
         <ul className='form-instruction'>
-          <li><span>Max</span>imum <span>20</span> characters</li>
-          <li>Alphanumeric (A&ndash;Z, a&ndash;z, 0&ndash;9) and/or underscores (_) only</li>
+          <li className={formData.username.length > 20 ? 'invalid' : ''}>
+            Maximum 20 characters
+          </li>
+          <li className={
+            /^[A-Za-z0-9_]*$/.test(formData.username) ? '' : 'invalid'
+          }>Alphanumeric (A&ndash;Z, a&ndash;z, 0&ndash;9) and/or underscores (_) only</li>
         </ul>
         <label>E-mail Address</label>
         <input
@@ -78,7 +82,9 @@ const RegisterUser = ({ setUser }) => {
         />
         <div></div>
         <ul className='form-instruction'>
-          <li><span>Min</span>imum <span>8</span> characters</li>
+          <li className={formData.password.length < 8 ? 'invalid' : ''}>
+            Minimum 8 characters
+          </li>
         </ul>
         <label>Confirm Password</label>
         <input
@@ -88,6 +94,12 @@ const RegisterUser = ({ setUser }) => {
           value={formData.confirmPassword}
           onChange={handleChange}
         />
+        <div></div>
+        <ul className='form-instruction'>
+          <li className={
+            formData.password === formData.confirmPassword ? '' : 'invalid'}
+          >Must match password entered above</li>
+        </ul>
         <button
           className='nav-button'
           type='submit'

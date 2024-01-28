@@ -17,8 +17,27 @@ $window-background-color: black;
   justify-content: center;
 }
 
-.blur {
-  filter: blur(8px);
+@mixin panel {
+  background-color: $panel-background-color;
+  border-radius: 4px;
+}
+
+@mixin embedded-form {
+  background-color: $embedded-form-background-color;
+  border: none;
+  border-radius: 4px;
+  color: inherit;
+  font-family: inherit;
+}
+
+@mixin hover {
+  background-color: $highlight-color;
+  color: $panel-background-color;
+}
+
+@mixin modal {
+  background-color: $modal-background-color;
+  border-radius: 4px;
 }
 
 * {
@@ -38,10 +57,17 @@ body {
   font-family: $font;
   height: 100vh;
 
+  .blur {
+    filter: blur(8px);
+  }
+
+  > div {
+    height: 100%;
+  }
+
   .nav-button {
-    background-color: $panel-background-color;
+    @include panel;
     border: none;
-    border-radius: 4px;
     cursor: pointer;
     font-family: inherit;
     font-size: 4vmin;
@@ -51,16 +77,13 @@ body {
     transition: 0.1s ease-in-out;
 
     &:hover {
-      background-color: $highlight-color;
-      color: $panel-background-color;
+      @include hover;
     }
   }
 
   .UserSearch {
+    @include modal;
     @include flex-center;
-
-    background-color: $modal-background-color;
-    border-radius: 4px;
     flex-direction: column;
     height: 50vmin;
     left: 50%;
@@ -97,8 +120,7 @@ body {
         }
 
         &:hover {
-          background-color: $highlight-color;
-          color: $panel-background-color;
+          @include hover;
         }
       }
     }
@@ -111,12 +133,8 @@ body {
       width: 100%;
 
       input {
-        background-color: $embedded-form-background-color;
-        border: none;
-        border-radius: 4px;
-        color: inherit;
+        @include embedded-form;
         cursor: text;
-        font-family: inherit;
         font-size: 1.85vmin;
         margin-right: 0.5vmin;
         padding-left: 1vmin;
@@ -127,18 +145,13 @@ body {
       }
 
       button {
-        background-color: $embedded-form-background-color;
-        border: none;
-        border-radius: 4px;
-        color: inherit;
+        @include embedded-form;
         cursor: pointer;
-        font-family: inherit;
         font-size: inherit;
         transition: 0.1s ease-in-out;
 
         &:hover {
-          background-color: $highlight-color;
-          color: $panel-background-color;
+          @include hover;
         }
       }
     }
@@ -147,13 +160,10 @@ body {
 
 .Splash {
   @include flex-center;
-
   flex-direction: column;
-  height: 100%;
 
   #splash-title {
     @include flex-center;
-
     font-size: 20vmin;
     font-weight: $font-bold-weight;
     height: 40vmin;
@@ -171,9 +181,7 @@ body {
 
 .LoginUser, .RegisterUser {
   @include flex-center;
-
   flex-direction: column;
-  height: 100%;
 
   .form-title {
     font-size: 7vmin;
@@ -194,9 +202,8 @@ body {
     }
 
     input {
-      background-color: $panel-background-color;
+      @include panel;
       border: none;
-      border-radius: 4px;
       color: $highlight-color;
       cursor: text;
       font-family: inherit;
@@ -215,8 +222,8 @@ body {
       margin-top: -1vmin;
       padding: 0 2.5vmin;
 
-      span {
-        color: $highlight-color;
+      .invalid {
+        color: $error-message-color;
       }
     }
 
@@ -247,12 +254,10 @@ body {
 .UserPage {
   display: grid;
   grid-template-columns: 23% 77%;
-  height: 100%;
   padding: 10px;
 
   .Chat {
-    background-color: $panel-background-color;
-    border-radius: 4px;
+    @include panel;
     display: flex;
     font-size: 1.85vmin;
     flex-direction: column;
@@ -260,7 +265,6 @@ body {
 
     > div {
       @include flex-center;
-
       margin-top: 0.5vmin;
 
       .nav-button {
@@ -297,7 +301,6 @@ body {
 
     .inactive {
       @include flex-center;
-
       color: $panel-overlay-background-color;
       flex: auto;
       flex-direction: column;
@@ -331,12 +334,8 @@ body {
       padding: 0.25vmin;
 
       input {
-        background-color: $embedded-form-background-color;
-        border: none;
-        border-radius: 4px;
-        color: inherit;
+        @include embedded-form;
         cursor: text;
-        font-family: inherit;
         font-size: inherit;
         margin-right: 0.25vmin;
 
@@ -346,27 +345,21 @@ body {
       }
 
       button {
-        background-color: $embedded-form-background-color;
-        border: none;
-        border-radius: 4px;
-        color: inherit;
+        @include embedded-form;
         cursor: pointer;
-        font-family: inherit;
         font-size: inherit;
         transition: 0.1s ease-in-out;
 
         &:hover {
-          background-color: $highlight-color;
-          color: $panel-background-color;
+          @include hover;
         }
       }
     }
   }
 
   .UserPageNav {
+    @include panel;
     align-items: center;
-    background-color: $panel-background-color;
-    border-radius: 4px;
     display: flex;
     font-size: 2vmin;
     height: 6vmin;
