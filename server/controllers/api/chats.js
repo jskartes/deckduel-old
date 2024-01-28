@@ -4,12 +4,16 @@ const initiateChat = async (req, res) => {
   try {
     const existingChat = await (
       Chat.findOne({players: {$all: [req.user._id, req.body._id]}})
+          .populate('players', 'username')
+          .exec()
     );
     if (existingChat) {
       res.json(existingChat);
     } else {
       const newChat = await (
         Chat.create({players: [req.user._id, req.body._id]})
+            .populate('players', 'username')
+            .exec()
       );
       res.json(newChat);
     }

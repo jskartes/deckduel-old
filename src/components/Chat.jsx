@@ -3,7 +3,10 @@ import ActiveChat from './ActiveChat';
 const Chat = ({ user,
                 toggleShowUserSearch,
                 initiateChat,
+                endChat,
                 activeChat }) => {
+  console.log(activeChat);
+
   return (
     <div className='Chat'>
       <div>
@@ -25,7 +28,11 @@ const Chat = ({ user,
       </div>
       {activeChat
       ?
-      <ActiveChat activeChat={activeChat} />
+      <ActiveChat
+        user={user}
+        activeChat={activeChat}
+        endChat={endChat}
+      />
       :
       <div className='inactive'>
         <span>No</span>

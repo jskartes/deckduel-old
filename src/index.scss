@@ -37,6 +37,7 @@ $window-background-color: black;
 
 @mixin modal {
   background-color: $modal-background-color;
+  border: 1px solid $font-color;
   border-radius: 4px;
 }
 
@@ -123,6 +124,15 @@ body {
           @include hover;
         }
       }
+
+      .no-users {
+        @include flex-center;
+        color: $panel-overlay-background-color;
+        flex: auto;
+        flex-direction: column;
+        font-size: 5vmin;
+        font-weight: $font-bold-weight;
+      }
     }
 
     .user-search {
@@ -147,7 +157,7 @@ body {
       button {
         @include embedded-form;
         cursor: pointer;
-        font-size: inherit;
+        font-size: 1.85vmin;
         transition: 0.1s ease-in-out;
 
         &:hover {
@@ -308,50 +318,82 @@ body {
       font-weight: $font-bold-weight;
     }
 
-    ul {
+    .ActiveChat {
       display: flex;
       flex: auto;
       flex-direction: column;
-      justify-content: flex-end;
-      list-style: none;
-      overflow-y: scroll;
-      padding: unset;
 
-      li {
-        border-radius: 4px;
-        margin: 0.4vmin 0.25vmin;
-        padding: 0.25vmin;
+      .chat-title {
+        font-size: 1.5vmin;
+        margin-bottom: 0.5vmin;
 
-        /*----- DEV -----*/
-        background-color: skyblue; // change when chat implemented
-      }
-    }
-
-    form {
-      display: grid;
-      grid-template-columns: 85% 15%;
-      height: auto;
-      padding: 0.25vmin;
-
-      input {
-        @include embedded-form;
-        cursor: text;
-        font-size: inherit;
-        margin-right: 0.25vmin;
-
-        &:focus {
-          outline: none;
+        span {
+          color: $highlight-color;
+          font-size: 1.75vmin;
+          font-weight: $font-bold-weight;
         }
       }
 
-      button {
-        @include embedded-form;
-        cursor: pointer;
-        font-size: inherit;
-        transition: 0.1s ease-in-out;
+      .chat-actions {
+        display: flex;
+        margin-bottom: 1.5vmin;
+        width: 100%;
 
-        &:hover {
-          @include hover;
+        div {
+          font-size: 1.75vmin;
+          margin: 0 0.2vmin;
+          padding: unset;
+          padding-top: 0.15vmin;
+          text-align: center;
+          width: 50%;
+        }
+      }
+
+      ul {
+        display: flex;
+        flex: auto;
+        flex-direction: column;
+        justify-content: flex-end;
+        list-style: none;
+        overflow-y: scroll;
+        padding: unset;
+        width: 100%;
+
+        li {
+          background-color: $panel-overlay-background-color;
+          border-radius: 4px;
+          margin: 0.4vmin 0.25vmin;
+          padding: 0.25vmin;
+        }
+      }
+
+      form {
+        display: grid;
+        grid-template-columns: 85% 15%;
+        height: auto;
+        padding: 0.25vmin;
+        width: 100%;
+
+        input {
+          @include embedded-form;
+          cursor: text;
+          font-size: inherit;
+          margin-right: 0.25vmin;
+
+          &:focus {
+            outline: none;
+          }
+        }
+
+        button {
+          @include embedded-form;
+          cursor: pointer;
+          font-size: inherit;
+          transition: 0.1s ease-in-out;
+
+          &:hover {
+            @include hover;
+          }
         }
       }
     }

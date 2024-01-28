@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import { io } from 'socket.io-client';
 
-const ActiveChat = ({ activeChat }) => {
+const ActiveChat = ({ user, activeChat, endChat }) => {
   const [newMessage, setNewMessage] = useState('');
 
   useEffect(() => {
     const socket = io('http://localhost:3000');
-    socket.on('connect', () => console.log(socket.id));
+    socket.on('connect', () => console.log('chat socket', socket.id));
     return () => socket.disconnect();
   }, []);
 
@@ -18,9 +18,17 @@ const ActiveChat = ({ activeChat }) => {
     event.preventDefault();
   }
 
+  const chatWith = activeChat.players.find(player => {
+    return player.username !== user.username
+  }).username;
+
   return (
     <div className='ActiveChat'>
-      <p>Chat with {activeChat.players[0].username}</p>
+      <span className='chat-title'>Chat with <span>{chatWith}</span></span>
+      <div className='chat-actions'>
+        <div className='nav-button'>Add as Friend</div>
+        <div className='nav-button' onClick={endChat}>End Chat</div>
+      </div>
       <ul>
         {activeChat.messages.map((message, index) => (
           <li key={index}>{message}</li>

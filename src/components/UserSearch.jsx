@@ -15,16 +15,17 @@ const UserSearch = ({ handleCancel, initiateChat }) => {
 
   const handleChange = event => setSearchString(event.target.value);
 
-  const filteredUsers = users.filter(user => {
-    return user.username.toLowerCase()
-                        .includes(searchString.toLowerCase());
-  });
+  const filteredUsers = users.filter(user => (
+    user.username.toLowerCase().includes(searchString.toLowerCase())
+  ));
 
   return (
     <div className='UserSearch'>
       <span>User Search</span>
       <div className='user-list'>
-        {filteredUsers.map((user, index) => (
+        {filteredUsers.length
+        ?
+        filteredUsers.map((user, index) => (
           <span
             className='username' 
             key={index}
@@ -33,7 +34,13 @@ const UserSearch = ({ handleCancel, initiateChat }) => {
             {user.isOnline && <span className='online'>&#9679;</span>}
             {user.username}
           </span>
-        ))}
+        ))
+        :
+        <div className='no-users'>
+          <span>No</span>
+          <span>Users</span>
+          <span>Found</span>
+        </div>}
       </div>
       <div className='user-search'>
         <input

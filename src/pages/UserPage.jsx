@@ -29,6 +29,13 @@ const UserPage = ({ user, setUser }) => {
     }
   }
 
+  const endChat = () => {
+    setPageStatus({
+      ...pageStatus,
+      activeChat: null
+    });
+  }
+
   const toggleShowUserSearch = () => {
     const currentShowUserSearch = pageStatus.showUserSearch;
     setPageStatus({
@@ -50,6 +57,7 @@ const UserPage = ({ user, setUser }) => {
         user={user}
         toggleShowUserSearch={toggleShowUserSearch}
         initiateChat={initiateChat}
+        endChat={endChat}
         activeChat={pageStatus.activeChat}
       />
       <div className='main-content'>
