@@ -27,3 +27,7 @@ export const loginUser = async credentials => {
 export const logoutUser = () => {
   sendRequest('/api/users/logout');
 }
+
+export const getFriends = async () => {
+  return sendRequest('/api/users/get-friends');
+}

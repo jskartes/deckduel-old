@@ -1,4 +1,5 @@
 const Chat = require('../../models/chat');
+const ChatMessage = require('../../models/chatMessage');
 
 const initiateChat = async (req, res) => {
   try {
@@ -10,8 +11,9 @@ const initiateChat = async (req, res) => {
     if (existingChat) {
       res.json(existingChat);
     } else {
+      await Chat.create({players: [req.user._id, req.body._id]});
       const newChat = await (
-        Chat.create({players: [req.user._id, req.body._id]})
+        Chat.findOne({players: {$all: [req.user._id, req.body._id]}})
             .populate('players', 'username')
             .exec()
       );

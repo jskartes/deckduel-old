@@ -1,3 +1,5 @@
+import { useState, useEffect } from 'react';
+import * as usersAPI from '../utilities/users-api';
 import ActiveChat from './ActiveChat';
 
 const Chat = ({ user,
@@ -5,7 +7,23 @@ const Chat = ({ user,
                 initiateChat,
                 endChat,
                 activeChat }) => {
-  console.log(activeChat);
+  const [friends, setFriends] = useState([]);
+
+  useEffect(() => {
+    const getFriends = async () => {
+      const friends = await usersAPI.getFriends();
+      setFriends(friends);
+    }
+    getFriends();
+  }, []);
+
+  const addFriend = newFriend => {
+    try {
+      
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <div className='Chat'>
@@ -18,8 +36,8 @@ const Chat = ({ user,
       <div className='friends'>
         <span>Friends</span>
         <div className='friends-list'>
-          {user.friends &&
-          user.friends.map(friend => (
+          {friends &&
+          friends.map(friend => (
             <span onClick={() => initiateChat(friend)}>
               {friend.username}
             </span>
@@ -31,6 +49,7 @@ const Chat = ({ user,
       <ActiveChat
         user={user}
         activeChat={activeChat}
+        addFriend={addFriend}
         endChat={endChat}
       />
       :

@@ -5,7 +5,14 @@ export const initiateChat = async withUser => {
     const chat = await sendRequest('/api/chats/initiate', 'POST', withUser);
     return chat;
   } catch (error) {
-    console.log(error);
+    throw new Error(error);
+  }
+}
+
+export const sendMessage = async message => {
+  try {
+    sendRequest('/api/chats/send', 'POST', message);
+  } catch (error) {
     throw new Error(error);
   }
 }

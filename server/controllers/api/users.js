@@ -48,8 +48,18 @@ const logoutUser = async (req, res) => {
   res.json('Logout successful');
 }
 
+const getFriends = async (req, res) => {
+  const user = await (
+    User.findOne({username: req.user.username})
+        .populate('friends')
+        .exec()
+  );
+  res.json(user.friends);
+}
+
 module.exports = {
   getAllUsers,
+  getFriends,
   loginUser,
   logoutUser,
   registerUser
