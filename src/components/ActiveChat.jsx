@@ -1,14 +1,41 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
+import io from 'socket.io-client';
+import * as chatsAPI from '../utilities/chats-api';
 
 const ActiveChat = ({ user, activeChat, addFriend, endChat }) => {
+  const [messageHistory, setMessageHistory] = useState([]);
   const [newMessage, setNewMessage] = useState('');
+
+  const socket = useRef(null);
+
+  useEffect(() => {
+    setMessageHistory([...activeChat.messages]);
+    
+    socket.current = io('http://localhost:3000');
+    socket.current.on('connect', () => {
+      socket.current.emit('join', activeChat._id)
+    });
+
+    return () => {
+      if (socket.current) socket.current.disconnect();
+    }
+  }, []);
+
+  useEffect(() => {
+    socket.current.on('message', message => {
+      setMessageHistory([...messageHistory, message]);
+    })
+  }, [socket.current, messageHistory]);
 
   const handleChange = event => {
     setNewMessage(event.target.value);
   }
 
-  const sendMessage = event => {
+  const sendMessage = async event => {
     event.preventDefault();
+    const message = await chatsAPI.saveMessageToChat(activeChat, newMessage);
+    socket.current.emit('message', message);
+    setNewMessage('');
   }
 
   const chatWith = activeChat.players.find(player => {
@@ -29,8 +56,13 @@ const ActiveChat = ({ user, activeChat, addFriend, endChat }) => {
         </div>
       </div>
       <ul>
-        {activeChat.messages.map((message, index) => (
-          <li key={index}>{message}</li>
+        {messageHistory.map((message, index) => (
+          <li
+            key={index}
+            className={user._id === message.author ?
+                      'user-author' :
+                      'user-not-author'}
+          >{message.content}</li>
         ))}
       </ul>
       <form onSubmit={sendMessage} autoComplete='off'>

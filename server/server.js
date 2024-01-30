@@ -3,7 +3,6 @@ const cors = require('cors');
 const morgan = require('morgan');
 const { resolve, dirname } = require('path');
 const { createServer } = require('http');
-const { Server } = require('socket.io');
 require('dotenv').config();
 require('./config/database');
 
@@ -11,11 +10,24 @@ const app = express();
 app.use(cors());
 
 const server = createServer(app);
-const io = new Server(server, {cors: {origin: 'http://localhost:3000'}});
-io.on('connection', socket => {
+const io = require('socket.io')(server, {
+  cors: {
+    origin: 'http://localhost:3000',
+    methods: ['GET', 'POST']
+  }
+});
+io.sockets.on('connection', socket => {
   console.log(`User connected (socket id: ${socket.id})`);
+  socket.on('join', room => {
+    console.log(`Socket ${socket.id} joining room ${room}`);
+    socket.room = room;
+    socket.join(room);
+  });
+  socket.on('message', message => {
+    io.to(socket.room).emit('message', message);
+  });
   socket.on('disconnect', () => {
-    console.log(`User disconnected (socket id: ${socket.id}`);
+    console.log(`User disconnected (socket id: ${socket.id})`);
   });
 });
 

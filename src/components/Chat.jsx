@@ -18,11 +18,7 @@ const Chat = ({ user,
   }, []);
 
   const addFriend = newFriend => {
-    try {
-      
-    } catch (error) {
-      console.log(error);
-    }
+    // TODO
   }
 
   return (
@@ -37,10 +33,10 @@ const Chat = ({ user,
         <span>Friends</span>
         <div className='friends-list'>
           {friends &&
-          friends.map(friend => (
-            <span onClick={() => initiateChat(friend)}>
+          friends.map((friend, index) => (
+            <p key={index} onClick={() => initiateChat(friend)}>
               {friend.username}
-            </span>
+            </p>
           ))}
         </div>
       </div>

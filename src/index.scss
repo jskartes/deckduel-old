@@ -271,6 +271,7 @@ body {
     display: flex;
     font-size: 1.85vmin;
     flex-direction: column;
+    height: 100%;
     margin-right: 10px;
 
     > div {
@@ -322,6 +323,7 @@ body {
       display: flex;
       flex: auto;
       flex-direction: column;
+      min-height: 0;
 
       .chat-title {
         font-size: 1.5vmin;
@@ -351,11 +353,11 @@ body {
 
       ul {
         display: flex;
-        flex: auto;
         flex-direction: column;
+        flex-grow: 1;
         justify-content: flex-end;
         list-style: none;
-        overflow-y: scroll;
+        overflow-y: auto;
         padding: unset;
         width: 100%;
 
@@ -363,7 +365,20 @@ body {
           background-color: $panel-overlay-background-color;
           border-radius: 4px;
           margin: 0.4vmin 0.25vmin;
-          padding: 0.25vmin;
+          padding: 0.25vmin 0.75vmin;
+          width: 80%;
+        }
+
+        .user-author {
+          align-self: last baseline;
+          background-color: rgba(0, 255, 255, 0.1);
+          color: rgba(0, 255, 255, 0.7);
+          text-align: right;
+        }
+
+        .user-not-author {
+          background-color: rgba(255, 255, 0, 0.15);
+          color: rgba(255, 255, 0, 0.7);
         }
       }
 

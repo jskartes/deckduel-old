@@ -9,9 +9,14 @@ export const initiateChat = async withUser => {
   }
 }
 
-export const sendMessage = async message => {
+export const saveMessageToChat = async (chat, messageContent) => {
   try {
-    sendRequest('/api/chats/send', 'POST', message);
+    const message = await sendRequest(
+      '/api/chats/save-message',
+      'POST',
+      {chat, messageContent}
+    );
+    return message;
   } catch (error) {
     throw new Error(error);
   }
